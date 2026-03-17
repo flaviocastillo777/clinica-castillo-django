@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row align-items-center justify-content-center py-5">
+        <div class="col-lg-10 text-center py-5">
+            <div class="mb-4">
+                <i class="bi bi-hospital text-primary" style="font-size: 4rem;"></i>
+            </div>
+            <h1 class="display-3 fw-bold lh-1 mb-3 text-dark">Clínica Castillo</h1>
+            
+            <p class="lead text-muted fs-4 mx-auto mb-5" style="max-width: 800px;">
+                Bienvenidos a Clínica Castillo. Sistema integral para la gestión de médicos y pacientes. 
+                Utilice la barra de navegación superior o los accesos directos para comenzar.
+            </p>
+
+            <div class="d-grid gap-3 d-sm-flex justify-content-sm-center mt-4">
+                <a href="{% url 'lista_medicos' %}" class="btn btn-primary btn-lg px-5 py-3 shadow">
+                    <i class="bi bi-heart-pulse-fill me-2"></i>Gestionar Médicos
+                </a>
+                <a href="{% url 'lista_pacientes' %}" class="btn btn-outline-dark btn-lg px-5 py-3 shadow-sm">
+                    <i class="bi bi-people-fill me-2"></i>Ver Pacientes
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+    }
+    .btn-lg {
+        border-radius: 12px;
+        transition: transform 0.2s;
+    }
+    .btn-lg:hover {
+        transform: translateY(-3px);
+    }
+</style>
+{% endblock %}

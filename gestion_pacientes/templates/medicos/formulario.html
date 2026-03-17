@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-lg border-0">
+            <div class="card-header bg-dark text-white text-center py-3">
+                <h4 class="mb-0">{% if medico %}Actualizar Datos Médico{% else %}Nuevo Registro Médico{% endif %}</h4>
+            </div>
+            <div class="card-body p-4">
+                <form method="POST">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Nombre del Profesional</label>
+                        <input type="text" name="nombre" class="form-control form-control-lg" 
+                               value="{{ medico.nombre }}" placeholder="Ej: Juan Pérez" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Especialidad</label>
+                        <input type="text" name="especialidad" class="form-control" 
+                               value="{{ medico.especialidad }}" placeholder="Ej: Cardiología" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">Correo Electrónico</label>
+                        <input type="email" name="email" class="form-control" 
+                               value="{{ medico.email }}" placeholder="nombre@clinica.cl" required>
+                        <div class="form-text">El email debe ser único en el sistema.</div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            {% if medico %}Actualizar Registro{% else %}Confirmar Registro{% endif %}
+                        </button>
+                        <a href="{% url 'lista_medicos' %}" class="btn btn-light">Volver al listado</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

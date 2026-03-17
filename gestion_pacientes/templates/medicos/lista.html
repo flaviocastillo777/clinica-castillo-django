@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Cuerpo Médico</h2>
+    <a href="{% url 'crear_medico' %}" class="btn btn-primary">+ Registrar Médico</a>
+</div>
+
+<form method="GET" class="row g-2 mb-4">
+    <div class="col-auto">
+        <input type="text" name="esp" class="form-control" placeholder="Filtrar por especialidad..." value="{{ request.GET.esp }}">
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-info text-white">Buscar</button>
+        <a href="{% url 'lista_medicos' %}" class="btn btn-outline-secondary">Limpiar</a>
+    </div>
+</form>
+
+<div class="row">
+    {% for medico in medicos %}
+    <div class="col-md-4 mb-3">
+        <div class="card h-100 border-left-primary shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title text-primary">Dr. {{ medico.nombre }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ medico.especialidad }}</h6>
+                <p class="card-text"><small>{{ medico.email }}</small></p>
+                <div class="d-flex gap-2">
+                    <a href="{% url 'editar_medico' medico.id %}" class="btn btn-sm btn-outline-warning">Editar</a>
+                    <form action="{% url 'eliminar_medico' medico.id %}" method="POST" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('¿Eliminar al médico?')">Borrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+        <div class="alert alert-light text-center">No hay médicos registrados con esos criterios.</div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

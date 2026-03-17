@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <div class="card shadow-lg border-0">
+            <div class="card-body p-5">
+                <div class="text-center mb-4">
+                    <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                        <i class="bi bi-clipboard2-pulse fs-2"></i>
+                    </div>
+                    <h2 class="fw-bold">Ficha de Paciente</h2>
+                    <p class="text-muted small">Complete los datos del paciente para actualizar el sistema.</p>
+                </div>
+
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-floating mb-3">
+                        <input type="text" name="nombre" class="form-control" id="floatingNombre" placeholder="Nombre" value="{{ paciente.nombre }}" required>
+                        <label for="floatingNombre">Nombre Completo</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" name="rut" class="form-control" id="floatingRut" placeholder="RUT" value="{{ paciente.rut }}" required>
+                        <label for="floatingRut">RUT (Ej: 12.345.678-9)</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="date" name="fecha_nacimiento" class="form-control" id="floatingFecha" value="{{ paciente.fecha_nacimiento|date:'Y-m-d' }}" required>
+                        <label for="floatingFecha">Fecha de Nacimiento</label>
+                    </div>
+
+                    <div class="form-floating mb-4">
+                        <select name="medico" class="form-select" id="floatingSelect" required>
+                            {% for medico in medicos %}
+                                <option value="{{ medico.id }}" {% if paciente.medico_asignado.id == medico.id %}selected{% endif %}>
+                                    Dr. {{ medico.nombre }} ({{ medico.especialidad }})
+                                </option>
+                            {% endfor %}
+                        </select>
+                        <label for="floatingSelect">Médico Tratante</label>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg shadow-sm">
+                            <i class="bi bi-check2-circle me-1"></i> Guardar Registro
+                        </button>
+                        <a href="{% url 'lista_pacientes' %}" class="btn btn-link text-secondary mt-2">Volver al listado</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
