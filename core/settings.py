@@ -17,9 +17,8 @@ SECRET_KEY = 'django-insecure-362x1uqxf8q)v9my&06&f#xj-w%uh#7+)u&7smub=^*+hb5-t5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# 1. Seguridad: Permitir el dominio de Railway
-ALLOWED_HOSTS = ['*']
-
+# settings.py
+ALLOWED_HOSTS = ['clinica-castillo-django.onrender.com', '.onrender.com', 'localhost', '127.0.0.1']
 
 # Application definition
 
