@@ -77,10 +77,10 @@ WSGI_APPLICATION = 'core.wsgi.application'
 #        'PORT': '5432',
 #    }
 #}
-# 2. Base de datos: Usar la variable de entorno de Railway
+# 2. Base de datos: Usar la variable de entorno de Render
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgresql://postgres:pass@localhost:5432/db',
+        default='sqlite:///db.sqlite3', # Fallback local
         conn_max_age=600
     )
 }
@@ -122,4 +122,6 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
